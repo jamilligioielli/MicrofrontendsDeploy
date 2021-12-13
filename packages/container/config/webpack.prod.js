@@ -5,7 +5,7 @@ const packageJson = require('../package.json')
 
 // this will contain a string that says exactly 
 // where the production app wil be hosted
-const domain = process.env.PROJECT_DOMAIN
+const domain = process.env.PRODUCTION_DOMAIN
 
 const prodConfig = {
 	mode: 'production',
@@ -20,7 +20,7 @@ const prodConfig = {
 		new ModuleFederationPlugin({
 			name: 'container',
 			remotes: {
-				marketing: `marketing@${domain}/marketing/remoteEntry.js`
+				marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`
 			},
 			shared: packageJson.dependencies
 		})

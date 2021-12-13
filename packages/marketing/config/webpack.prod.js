@@ -12,7 +12,8 @@ const prodConfig = {
 	// all the different files will use this as a template
 	// on how to name them
 	output: {
-		filename: '[name].[contenthash].js'
+		filename: '[name].[contenthash].js',
+		publicPath: '/marketing/latest/'
 	},
 	plugins: [
 		// those plugins will now have a production domain
