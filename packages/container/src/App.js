@@ -24,8 +24,7 @@ export default () => {
 					<Suspense fallback={<Progress />}>
 						<Switch>
 							<Route path="/auth">
-								{' '}
-								<AuthLazy onSignIn={() => setIsSignedIn(true)} />{' '}
+								<AuthLazy onSignIn={() => setIsSignedIn(true)} />
 							</Route>
 							<Route path="/" component={MarketingLazy} />
 						</Switch>
