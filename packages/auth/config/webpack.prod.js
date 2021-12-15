@@ -3,9 +3,8 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common')
 const packageJson = require('../package.json')
 
-// this will contain a string that says exactly 
+// this will contain a string that says exactly
 // where the production app wil be hosted
-const domain = process.env.PRODUCTION_DOMAIN
 
 const prodConfig = {
 	mode: 'production',
@@ -13,15 +12,15 @@ const prodConfig = {
 	// on how to name them
 	output: {
 		filename: '[name].[contenthash].js',
-		publicPath: '/container/latest/'
+		publicPath: '/auth/latest/'
 	},
 	plugins: [
 		// those plugins will now have a production domain
 		new ModuleFederationPlugin({
-			name: 'container',
-			remotes: {
-				marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
-				auth: `auth@${domain}/auth/latest/remoteEntry.js`
+			name: 'auth',
+			filename: 'remoteEntry.js',
+			exposes: {
+				'./AuthApp': './src/bootstrap'
 			},
 			shared: packageJson.dependencies
 		})

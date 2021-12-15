@@ -1,12 +1,29 @@
 import { mount } from 'marketing/MarketingApp'
 import React, { useRef, useEffect } from 'react'
 
+import { useHistory } from 'react-router-dom'
+
 export default () => {
     const ref = useRef(null)
+    const history = useHistory()
 
     useEffect(() => {
-        mount(ref.current)
-    })
+        const { onParentNavigate } = mount(ref.current, {
+            initialPath: history.location.pathname,
+            onNavigate: ({ pathname: nextPathname }) => {
+                // adding the check if we want to change the path
+                const { pathname } = history.location
+                // then we want to navigate to this new path
+                if (pathname !== nextPathname) {
+                    history.push(nextPathname)
+                }
+            }
+        })
+
+        history.listen(onParentNavigate)
+        
+        // only try to run this function when our makerting app is on the screen
+    }, [])
 
     return <div ref={ref} />
 }
